@@ -949,3 +949,12 @@
       def end(self):
         print("Done")
   out: |
+- case: task_data_autocomplete_discovery
+  main: |
+    from metaflow import Task
+
+    task = Task('TabTest/1772291319761877/start/1')
+    
+    reveal_type(task.data.secret_artifact)
+  out: |
+    main:6: note: Revealed type is "Any"

@@ -1147,6 +1147,8 @@ class MetaflowData(object):
 
     def __repr__(self):
         return str(self)
+    def __dir__(self):
+        return sorted(list(set(super().__dir__()) | set(self._artifacts.keys())))
 
 
 class Task(MetaflowObject):
@@ -2687,6 +2689,11 @@ class Metaflow(object):
             Flow with the given name.
         """
         return Flow(name, _metaflow=self)
+    def _ipython_key_completions_(self):
+        """
+        Enables bracket completion: Metaflow()["<TAB>"]
+        """
+        return [f.id for f in self]
 
 
 def _metadata(ms: str) -> Tuple[Optional["MetadataProvider"], Optional[str]]:
